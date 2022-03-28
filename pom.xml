@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.rabbit.music</groupId>
     <artifactId>rabbit-music-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>rabbit-music-api</name>
     <description>rabbit-music-api</description>
     <properties>
