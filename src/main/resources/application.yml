@@ -1,0 +1,12 @@
+
+server:
+  port: 8088
+spring:
+  profiles:
+    active: dev
+  application:
+    name: rabbit-music
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE_NAME}?chartacterEncoding=UTF-8&userSSL=false
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
