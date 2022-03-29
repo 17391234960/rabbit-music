@@ -50,4 +50,4 @@ COPY --from=build /app/target/rabbit-music-api-0.0.1.jar .
 EXPOSE 80
 
 # 执行启动命令
-CMD ["java", "-jar", "/app/rabbit-music-api-0.0.1.jar"]
+CMD ["java", "-jar", "-Dspring.profiles.active=prod", "/app/rabbit-music-api-0.0.1.jar"]
