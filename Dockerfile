@@ -20,15 +20,21 @@ FROM alpine:3.13
 
 ENV APPLICATION_PORT=80
 
-ENV MYSQL_HOST=10.0.224.6
+#ENV MYSQL_HOST=10.0.224.6
+
+ENV MYSQL_HOST=47.103.199.19
 
 ENV MYSQL_PORT=3306
 
 ENV MYSQL_DATABASE_NAME=rabbit_music
 
-ENV MYSQL_USERNAME=rabbit
+#ENV MYSQL_USERNAME=rabbit
 
-ENV MYSQL_PASSWORD=Rabbit2022
+#ENV MYSQL_PASSWORD=Rabbit2022
+
+ENV MYSQL_USERNAME=root
+
+ENV MYSQL_PASSWORD=1234960
 
 # 容器默认时区为UTC，如需使用上海时间请启用以下时区设置命令
 # RUN apk add tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai > /etc/timezone
