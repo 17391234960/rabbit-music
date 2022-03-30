@@ -1,4 +1,4 @@
-package com.rabbit.music;
+package com.skyblue.rabbitmusic;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

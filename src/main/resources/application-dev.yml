@@ -1,6 +1,5 @@
-
-server:
-  port: 8089
+#server:
+#  port: ${}
 #spring:
 #  profiles:
 #    active: dev
