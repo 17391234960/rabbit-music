@@ -1,6 +1,5 @@
-
 server:
-  port: 8088
+  port: ${APPLICATION_PORT}
 spring:
   profiles:
     active: dev
@@ -11,3 +10,7 @@ spring:
     username: ${MYSQL_USERNAME}
     password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    generate-ddl: false
+  flyway:
+    enabled: true

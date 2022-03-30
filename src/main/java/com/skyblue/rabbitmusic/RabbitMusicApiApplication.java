@@ -1,4 +1,4 @@
-package com.rabbit.music;
+package com.skyblue.rabbitmusic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
