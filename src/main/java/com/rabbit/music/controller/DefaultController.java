@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DefaultController {
 
 
-    @RequestMapping("/")
+    @RequestMapping("")
     public String test() {
         return "say hello";
     }
