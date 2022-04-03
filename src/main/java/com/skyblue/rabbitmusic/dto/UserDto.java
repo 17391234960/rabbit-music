@@ -2,12 +2,15 @@ package com.skyblue.rabbitmusic.dto;
 
 import com.skyblue.rabbitmusic.enums.Gender;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class UserDto {
+public class UserDto extends BaseDto {
+
     private String id;
 
     private String username;
@@ -25,4 +28,5 @@ public class UserDto {
     private String lastLoginIp;
 
     private Date lastLoginTime;
+
 }

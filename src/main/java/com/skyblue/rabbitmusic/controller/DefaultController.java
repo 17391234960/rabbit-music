@@ -1,5 +1,6 @@
 package com.skyblue.rabbitmusic.controller;
 
+import com.skyblue.rabbitmusic.vo.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +12,9 @@ public class DefaultController {
     private static final Logger log = LoggerFactory.getLogger(DefaultController.class);
 
     @RequestMapping("")
-    public String test() {
+    public Result<String> test() {
         log.info("访问了sayhello");
-        return "say hello";
+        return Result.ok("say hello");
     }
 
 
