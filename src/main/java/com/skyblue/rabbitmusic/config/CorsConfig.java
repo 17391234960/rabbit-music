@@ -34,6 +34,7 @@ public class CorsConfig {
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.addAllowedOrigin("*");
+        corsConfiguration.addExposedHeader("*"); // 重点 加上此配置前端响应体才可以获取请求头header
         source.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(source);
     }

@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Data
 public abstract class BaseDto implements Serializable {
+
     protected String id;
 
     protected Date createdTime;

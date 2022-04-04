@@ -11,8 +11,6 @@ import java.util.List;
 @Data
 public class UserDto extends BaseDto {
 
-    private String id;
-
     private String username;
 
     private String nickname;

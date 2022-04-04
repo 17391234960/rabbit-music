@@ -1,10 +1,11 @@
 package com.skyblue.rabbitmusic.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class RoleDto {
-    private String id;
+public class RoleDto  extends BaseDto {
 
     private String name;
 
