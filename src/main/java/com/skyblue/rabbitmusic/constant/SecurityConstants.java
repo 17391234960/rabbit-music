@@ -25,6 +25,8 @@ public interface SecurityConstants {
 
     String IMAGES = "/images/getImage";
 
+    String IMAGESURL = "/images/getImageUrl";
+
     String SITE_SETTING_URL = "/settings/site";
 
 }

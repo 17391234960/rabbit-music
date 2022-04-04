@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -39,9 +40,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException {
         User principal = ((User) authResult.getPrincipal());
         String token = JWTUtils.generateToken(principal.getUsername());
-        response.addHeader(SecurityConstants.TOKEN_AUTHENTICATION,SecurityConstants.TOKEN_PREFIX + token);
+        response.setContentType("application/json;charset=UTF-8");
+        response.addHeader(SecurityConstants.TOKEN_AUTHENTICATION, SecurityConstants.TOKEN_PREFIX + token);
+//        response.setHeader("header", token);
+        response.getWriter().write(token);
     }
 }

@@ -1,36 +1,87 @@
 package com.skyblue.rabbitmusic.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.skyblue.rabbitmusic.dto.ImagePicDto;
+import com.skyblue.rabbitmusic.service.ImagePicService;
 import com.skyblue.rabbitmusic.vo.Result;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/images")
+@AllArgsConstructor
 public class ImagesController {
     private final Logger log = LoggerFactory.getLogger(ImagesController.class);
 
     private static final String url ="https://iw233.cn/API/pc.php?type=json";
 
+    private final ImagePicService imagePicService;
+
+    /**
+     * 获取所有数据库地址
+     * @return 所有图片地址
+     */
+    @GetMapping("/getAllImage")
+    public Result<List<ImagePicDto>> getAllImage() {
+        return Result.ok(imagePicService.listAll());
+    }
+
+    /**
+     * 获取随机图片地址 带参数
+     * @return 前缀参数 url
+     */
     @GetMapping("/getImage")
     public Result<String> getImage() {
-        String img = sendRequest(url, HttpMethod.GET.name());
+        String img = getRequireImageUrl();
         Map<String,Object> parse =  JSON.parseObject(img);
         String pic = (String) parse.get("pic");
         return Result.ok(pic);
+    }
+
+    /**
+     * 获取随机图片地址
+     * @return  image url
+     */
+    @GetMapping("/getImageUrl")
+    public String getImageUrl() {
+        String img = getRequireImageUrl();
+        Map<String,Object> parse =  JSON.parseObject(img);
+        return (String) parse.get("pic");
+    }
+
+    /**
+     * 校验图片是否可用
+     * @return 图片数据
+     */
+    public String getRequireImageUrl() {
+        String img = sendRequest(url, HttpMethod.GET.name());
+        Map<String,Object> parse =  JSON.parseObject(img);
+        Boolean pic = isImagesTrue((String) parse.get("pic"));
+        int i = 0;
+        while (!pic && i <= 10) {
+            i++;
+            img = sendRequest(url, HttpMethod.GET.name());
+            parse =  JSON.parseObject(img);
+            pic = isImagesTrue((String) parse.get("pic"));
+        }
+        return img;
     }
 
 
@@ -78,6 +129,40 @@ public class ImagesController {
         stringObjectHashMap.put("pic","");
         return JSON.toJSONString(stringObjectHashMap);
 
+    }
+
+    /**
+     * 判断网络图片是否存在
+     * imgUrl 图片地址链接
+     */
+    public Boolean isImagesTrue(String imgUrl) {
+
+        int RESPONSE_CODE = 0;
+        try {
+            URL url = new URL(imgUrl);
+            HttpURLConnection urlcon = (HttpURLConnection) url.openConnection();
+            RESPONSE_CODE = urlcon.getResponseCode();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (RESPONSE_CODE == HttpURLConnection.HTTP_OK) {
+            log.info("图片可以访问 posted ok!");
+            // 保存数据
+            ImagePicDto imagePicDto = new ImagePicDto();
+            imagePicDto.setPicUrl(imgUrl);
+            imagePicDto.setPicName("");
+//            UserDto loginUser = SecurityUtils.getLoginUser();
+//            imagePicDto.setRemark(loginUser.getUsername());
+            String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            log.error("logUser{}",principal);
+            imagePicService.create(imagePicDto);
+            return true;
+        } else {
+            log.error("图片不可以访问 Bad post...");
+            return false;
+        }
     }
 
 
