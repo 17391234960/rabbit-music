@@ -1,11 +1,9 @@
 package com.skyblue.rabbitmusic.vo;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class RoleVo extends BaseVo {
+public class RoleVo {
     private String id;
 
     private String name;

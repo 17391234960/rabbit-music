@@ -19,4 +19,10 @@ public interface ImagePicService {
      */
     ImagePicDto create(ImagePicDto imagePicDto);
 
+    /**
+     * 获取图片url
+     * @return url
+     */
+    String getImageUrl();
+
 }

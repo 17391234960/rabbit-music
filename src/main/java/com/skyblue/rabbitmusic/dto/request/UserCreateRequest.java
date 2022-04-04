@@ -1,4 +1,4 @@
-package com.skyblue.rabbitmusic.dto;
+package com.skyblue.rabbitmusic.dto.request;
 
 import com.skyblue.rabbitmusic.enums.Gender;
 import lombok.Data;
