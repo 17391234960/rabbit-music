@@ -19,7 +19,7 @@ public interface SecurityConstants {
 
     long EXPIRATION_TIME = 864000000; // 10 days
 
-    String CREATE_TOKEN_URL = "/tokens/**";
+    String CREATE_TOKEN_URL = "/token/**";
 
     String SIGN_UP_URL = "/users/";
 

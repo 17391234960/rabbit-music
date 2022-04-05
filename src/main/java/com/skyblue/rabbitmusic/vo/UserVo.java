@@ -2,13 +2,11 @@ package com.skyblue.rabbitmusic.vo;
 
 import com.skyblue.rabbitmusic.enums.Gender;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class UserVo extends BaseVo {
+public class UserVo {
 
     private String username;
 

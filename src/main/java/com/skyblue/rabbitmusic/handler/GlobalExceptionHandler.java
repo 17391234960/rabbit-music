@@ -1,16 +1,16 @@
 package com.skyblue.rabbitmusic.handler;
 
+import com.skyblue.rabbitmusic.enums.StatusCodeEnum;
 import com.skyblue.rabbitmusic.exception.BizException;
 import com.skyblue.rabbitmusic.exception.ErrorResponse;
-import com.skyblue.rabbitmusic.enums.StatusCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setCode(StatusCodeEnum.INNER_ERROR.getCode());
         errorResponse.setMessage(StatusCodeEnum.INNER_ERROR.getMessage());
-        e.printStackTrace();
+//        e.printStackTrace();
         log.error(e.getMessage());
         return errorResponse;
     }
@@ -61,8 +61,9 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setCode(StatusCodeEnum.FORBIDDEN.getCode());
         errorResponse.setMessage(StatusCodeEnum.FORBIDDEN.getMessage());
-        e.printStackTrace();
-        log.error(e.getMessage());
+//        e.printStackTrace();
+        log.error("不允许访问,权限级别不够");
+//        log.error(e.getMessage());
         return errorResponse;
     }
 
